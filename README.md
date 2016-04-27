@@ -6,4 +6,4 @@ Prerequisites:
 * Basic HTML
 * Form submission
 * Asynchronous requests (using jQuery, for example)
-And probably some more things too.
+* And probably some more things too.
