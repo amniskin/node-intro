@@ -1,14 +1,3 @@
-/*function makeAppendQuestion$(insertID) {
-    var section = $("#" + insertID);
-    return function(num, qText, qResArr) {
-        section.append(
-            `<h3 class="text-center">${qText}</h3>`
-        )
-    }
-}*/
-
-
-
 $(document).ready(function() {
     $.ajax({
         url: "http://localhost:9000/get-courses",
@@ -17,22 +6,22 @@ $(document).ready(function() {
             var courses = $.parseJSON(res);
             $("#survey-parts").prepend(
                 `<div class='well'>
-<div class="row">
-<div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-0">
-<h3 class="text-center">What course are you enrolled in?</h3>
-</div>
-<div class="col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-0">
-                    <div class='form-group' id='part0'>
-                        <select class="form-control input-lg" name="c_id">
-                            <option disabled >Select one</option>
-                        </select>
+                  <div class="row">
+                    <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-0">
+                      <h3 class="text-center">What course are you enrolled in?</h3>
                     </div>
-</div>
-</div>
-</div>`);
+                    <div class="col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-0">
+                      <div class='form-group' id='part0'>
+                        <select class="form-control input-lg" name="c_id">
+                          <option disabled >Select one</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>`);
             for (var i = 0; i<courses.length; i++) {
-                $("#part0 select").append(`<option value='${courses[i].c_ID}'>
-                        ${courses[i].course_code.toUpperCase()} taught by ${courses[i].professor}</option>`);
+              $("#part0 select").append(`<option value='${courses[i].c_ID}'>
+                  ${courses[i].course_code.toUpperCase()} taught by ${courses[i].professor}</option>`);
             }
         }
     });
@@ -42,20 +31,20 @@ $(document).ready(function() {
         success: function(res) {
             var questions = $.parseJSON(res);
             for (var i = 0; i<questions.length; i++){
-                var question = $(
-                    `
-<div class="well"><div class="row">
-<div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-0">
-<h3 class='text-center'>${questions[i].question}</h3>
-</div>
-<div class="col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-0">
-<div class='form-group' id='part${i+1}'>
-                        <select class="form-control input-lg" name="q${i + 1}">
-                            <option disabled >Select one</option>
-                        </select>
-                    </div>
-</div>
-</div>
+                var question = $(`
+<div class="well">
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-0">
+      <h3 class='text-center'>${questions[i].q_text}</h3>
+    </div>
+    <div class="col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-0">
+      <div class='form-group' id='part${i+1}'>
+        <select class="form-control input-lg" name="q${i + 1}">
+          <option disabled >Select one</option>
+        </select>
+      </div>
+    </div>
+  </div>
 </div>`);
                 $("#survey-parts").append(question);
                 for (var j = 1; j <= 5; j++) {
